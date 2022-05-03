@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import RootRoutes from './components/organims/RootRoutes';
+import pxToRem from './utils/pxToRem';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const theme = {
+    colors: {
+        primary: '#FFE600',
+        background: '#EEEEEE',
+        darkGray: '#333333',
+        primaryButton: '#3483FA',
+        primaryButtonHover: '#2E61B3',
+        textLightGray: '#999999',
+        textDarkGray: '#666666',
+    },
+    baseSpace: 8,
+    rems: pxToRem,
+};
+
+export const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: ${theme.colors.background};
+  }
+`
+
+const App = () => {
+    return (
+        <>
+            <GlobalStyle />
+            <ThemeProvider theme={theme}>
+                <RootRoutes />
+            </ThemeProvider>
+        </>
+    )
 }
 
-export default App;
+export default App
